@@ -24,12 +24,6 @@ export interface Survey {
   createdAt: string;
 }
 
-/** פורמט ישן — לתאימות עם סקרים שכבר נשמרו ב-localStorage */
-export interface LegacySurvey extends Omit<Survey, 'sections'> {
-  questions?: Question[];
-  sections?: Section[];
-}
-
 export interface Answer {
   questionId: string;
   value: string | number | string[];

@@ -5,6 +5,7 @@ interface SurveyInput {
   title?: string;
   description?: string;
   sections?: ISection[];
+  questions?: unknown;
 }
 
 export function validateSurveyInput(input: SurveyInput): {
@@ -12,6 +13,10 @@ export function validateSurveyInput(input: SurveyInput): {
   description: string;
   sections: ISection[];
 } {
+  if (input.questions !== undefined) {
+    throw new AppError(400, 'פורמט לא נתמך: יש לשלוח שאלות בתוך קטעים (sections) בלבד');
+  }
+
   const title = input.title?.trim() ?? '';
   const description = input.description?.trim() ?? '';
   const sections = input.sections ?? [];
