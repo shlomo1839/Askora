@@ -17,7 +17,7 @@ export const SurveyService = {
   async createSurvey(payload: SurveyPayload): Promise<Survey> {
     const data = await apiRequest<{ survey: Survey }>('/api/surveys', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      data: payload,
     });
     return data.survey;
   },
@@ -25,7 +25,7 @@ export const SurveyService = {
   async updateSurvey(surveyId: string, payload: SurveyPayload): Promise<Survey> {
     const data = await apiRequest<{ survey: Survey }>(`/api/surveys/${surveyId}`, {
       method: 'PUT',
-      body: JSON.stringify(payload),
+      data: payload,
     });
     return data.survey;
   },
@@ -50,7 +50,7 @@ export const SurveyService = {
       `/api/surveys/${surveyId}/submissions`,
       {
         method: 'POST',
-        body: JSON.stringify({ answers }),
+        data: { answers },
       },
       false
     );

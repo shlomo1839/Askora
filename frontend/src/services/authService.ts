@@ -7,11 +7,11 @@ export const AuthService = {
       '/api/auth/register',
       {
         method: 'POST',
-        body: JSON.stringify({
+        data: {
           name: data.name.trim(),
           email: data.email.trim().toLowerCase(),
           password: data.password,
-        }),
+        },
       },
       false
     );
@@ -22,10 +22,10 @@ export const AuthService = {
       '/api/auth/login',
       {
         method: 'POST',
-        body: JSON.stringify({
+        data: {
           email: data.email.trim().toLowerCase(),
           password: data.password,
-        }),
+        },
       },
       false
     );
