@@ -14,7 +14,6 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom';
 import AppLayout from '../components/AppLayout';
-import { ApiError } from '../services/api';
 import { SurveyService } from '../services/surveyService';
 import type { Question, Survey, SurveySubmission } from '../types/survey.types';
 
@@ -142,7 +141,10 @@ export default function SurveyResults() {
           const submissionsData = await SurveyService.getSurveySubmissions(surveyId);
           setSubmissions(submissionsData);
         } catch (err) {
-          if (err instanceof ApiError && err.statusCode === 403) {
+          if (
+            err instanceof Error &&
+            err.message === 'אין לך הרשאה לצפות בתוצאות של סקר זה'
+          ) {
             setForbidden(true);
           } else {
             throw err;
